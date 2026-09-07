@@ -63,7 +63,7 @@
         </ul>
         <dl class="hero-stats reveal">
           <div><dt>Academic Units</dt><dd>99</dd></div>
-          <div><dt>Projects</dt><dd>7+</dd></div>
+          <div><dt>Projects</dt><dd>5+</dd></div>
           <div><dt>Languages</dt><dd>2</dd></div>
         </dl>
       </div>
@@ -301,19 +301,19 @@
 
         <article class="project project-feature reveal">
           <div class="project-main">
-            <p class="project-meta">Personal Project · May 2024 – Present</p>
-            <h3>AI Dungeon Master — a locally fine-tuned LLM</h3>
+            <p class="project-meta">Personal Project · May 2024 – Present · <a href="https://github.com/Bardbar1an/ai-dm" target="_blank" rel="noopener">code ↗</a></p>
+            <h3>AI Dungeon Master — a locally fine-tuned LLM agent</h3>
             <p class="project-lead">
-              A Dungeons &amp; Dragons game master powered by a fine-tuned 7B language model that runs
-              <strong>fully on-device</strong> — no cloud API dependency.
+              A Dungeons &amp; Dragons game master built as a stateful LLM agent on a fine-tuned 7B model that runs
+              on-device via its own OpenAI-compatible server — no cloud dependency at runtime.
             </p>
             <ul class="project-points">
-              <li>Fine-tuned <strong>Qwen 2.5 7B</strong> with <strong>QLoRA 4-bit</strong> on curated D&amp;D datasets (rulebooks, campaign modules, lore) for genre-appropriate storytelling and consistent rule adherence.</li>
-              <li>Built a <strong>RAG pipeline</strong> (ChromaDB + sentence-transformers) so the narrator answers from campaign lore; Python owns all game state, dice, and maps in a Streamlit app.</li>
-              <li>Quantized to <strong>GGUF</strong> (F16 → Q4_K_M: <strong>14.2 → 4.4 GiB</strong>, ~2.4× faster inference) and benchmarked quality with an LLM-as-judge eval harness.</li>
-              <li>Iterated on fine-tuning data and prompts based on real player feedback to improve storytelling quality.</li>
+              <li><strong>LangGraph agent</strong> (rule-judge → narrator) with checkpointed memory — the LLM narrates while Python owns game state, dice and maps; Streamlit app with Whisper voice input and TTS.</li>
+              <li>Fine-tuned <strong>Qwen2.5-7B</strong> with <strong>QLoRA 4-bit</strong> (Unsloth + TRL) on curated D&amp;D instruction data distilled from API transcripts — trained on a consumer RTX 5080, no cloud GPU spend.</li>
+              <li>Built an <strong>LLM-as-a-judge</strong> evaluation harness (weighted 1–5 rubric) over a held-out prompt set, running head-to-head comparisons of the cloud baseline vs. the fine-tuned local model.</li>
+              <li>Quantized to <strong>GGUF</strong> and benchmarked four levels (F16 → Q4_K_M: <strong>14.2 → 4.4 GiB</strong>, ~2.4× faster); <strong>RAG</strong> (ChromaDB + MiniLM) injects top-k campaign-lore chunks into the narrator prompt.</li>
             </ul>
-            <div class="project-tags"><span>Python</span><span>QLoRA</span><span>Transformers</span><span>RAG</span><span>Streamlit</span><span>GGUF</span></div>
+            <div class="project-tags"><span>Python</span><span>LangGraph</span><span>QLoRA</span><span>Transformers</span><span>RAG</span><span>Streamlit</span><span>GGUF</span></div>
           </div>
           <div class="project-visual" aria-hidden="true">
             <div class="pv-card pv-dice">⚄</div>
@@ -336,15 +336,15 @@
           </article>
 
           <article class="project reveal">
-            <p class="project-meta">EE3180 Design &amp; Innovation Project · Jan – May 2026</p>
-            <h3>MARS — Multi-Agent Pathfinding Simulator</h3>
-            <p class="project-lead">Real-time Pygame playground where many agents navigate to a parking zone while avoiding obstacles and each other.</p>
+            <p class="project-meta">EE3180 Design &amp; Innovation Project · Grade A- · Jan – May 2026 · <a href="https://github.com/Bardbar1an/MAPF" target="_blank" rel="noopener">code ↗</a></p>
+            <h3>MARS — Multi-Agent Pathfinding &amp; Relocation Simulator</h3>
+            <p class="project-lead">Real-time Pygame playground where many agents navigate to an exit/parking zone while avoiding obstacles and each other.</p>
             <ul class="project-points">
-              <li>One <strong>generic A* core</strong> reused by three planners: <strong>visibility-graph A*</strong>, <strong>artificial potential-field</strong> steering, and <strong>adaptive quadtree-grid A*</strong> with dynamic cost penalties and path smoothing.</li>
-              <li>Modular control loop (centralized planner + simulation engine): variable robots, start/reset/speed controls, dt time-stepping, live path rendering.</li>
-              <li>Deadlock recovery, smart-exit parking planner (BFS slot assignment), and an in-app map editor.</li>
+              <li>Interactive simulator in Python/Pygame: a centralized <strong>GlobalPlanner</strong> routes N agents to the exit/parking zone around obstacles, with <strong>smart-exit slot assignment</strong> and <strong>path smoothing</strong>.</li>
+              <li>Modular control loop separating planner from simulation engine — variable agents, start/reset/speed controls, time-stepped updates, live path rendering, pause-mode map editor.</li>
+              <li>Per-frame CSV simulation logging for analysis; demo GIF included.</li>
             </ul>
-            <div class="project-tags"><span>Python</span><span>Pygame</span><span>A*</span><span>Pathfinding</span><span>Simulation</span></div>
+            <div class="project-tags"><span>Python</span><span>Pygame</span><span>Multi-agent</span><span>Pathfinding</span><span>Simulation</span></div>
           </article>
 
           <article class="project reveal">
@@ -352,7 +352,7 @@
             <h3>ESP32-S3 On-Device Gesture Recognition</h3>
             <p class="project-lead">Gesture classifier trained in Python, quantized to int8, and run on a microcontroller — optionally streaming to AWS IoT.</p>
             <ul class="project-points">
-              <li>Collected and labeled <strong>MPU6050 IMU</strong> datasets over serial; trained a <strong>1D CNN</strong> in Keras (~95% test accuracy target on 4 gesture classes).</li>
+              <li>Collected and labeled <strong>MPU6050 IMU</strong> datasets over serial; trained a <strong>1D CNN</strong> in Keras (≈95% float-accuracy target on 4 gesture classes; int8 stays within a few points).</li>
               <li>Quantized float32 → <strong>int8 TensorFlow Lite Micro</strong> (model + scaler embedded as headers) for on-device inference.</li>
               <li>Streamed detected gestures to <strong>AWS IoT Core over MQTT</strong> with mutual TLS for cloud analytics.</li>
             </ul>
@@ -360,34 +360,11 @@
           </article>
 
           <article class="project reveal">
-            <p class="project-meta">Personal Project · 2026</p>
-            <h3>J.A.R.V.I.S. — Desktop Companion</h3>
-            <p class="project-lead">A system-tray AI butler for Windows that sees your screen, speaks, and controls your desktop.</p>
-            <ul class="project-points">
-              <li>PyQt6 chat window with a <strong>DeepSeek</strong> brain, GPT-4o screen/image vision, Whisper push-to-talk, and ElevenLabs voice output.</li>
-              <li><strong>18 tools</strong>: system monitoring, app launching, email via IMAP, PDF reading, clipboard, persistent memory — plus a remote client and hot-reload watcher.</li>
-              <li>107 pytest tests with all dangerous calls mocked.</li>
-            </ul>
-            <div class="project-tags"><span>PyQt6</span><span>DeepSeek</span><span>OpenAI</span><span>Whisper</span><span>Python</span></div>
-          </article>
-
-          <article class="project reveal">
-            <p class="project-meta">Personal Project · 2025</p>
-            <h3>Market Analysis Agent</h3>
-            <p class="project-lead">An AI agent that screens for undervalued US stocks and tracks S&amp;P 500 movement using live web data.</p>
-            <ul class="project-points">
-              <li>Structured skills (<code>/screen-undervalued</code>, <code>/spx-analysis</code>) driving multi-factor screening and breadth/macro analysis.</li>
-              <li>Pulls real market data from Yahoo Finance, Finviz, SEC EDGAR, and FRED; research journal persists in a memory store that builds over time.</li>
-            </ul>
-            <div class="project-tags"><span>Claude Code</span><span>Agent</span><span>Web Search</span><span>Finance</span></div>
-          </article>
-
-          <article class="project reveal">
-            <p class="project-meta">NTU Module · Team Leader of 3 · Aug – Oct 2024</p>
+            <p class="project-meta">NTU Module · Team Leader of 3 · Aug – Oct 2024 · <a href="https://github.com/Bardbar1an/Cardiovascular-Diseases-prediction" target="_blank" rel="noopener">code ↗</a></p>
             <h3>Cardiovascular Disease Risk Prediction</h3>
             <p class="project-lead">End-to-end ML pipeline on the Kaggle cardiovascular disease dataset (Intro to Data Science &amp; AI).</p>
             <ul class="project-points">
-              <li>Built a scikit-learn pipeline to clean, train, and evaluate models; <strong>Decision Tree</strong> selected as best performer at <strong>80% accuracy</strong>.</li>
+              <li>Built a scikit-learn pipeline to clean (70k → 68.7k rows after outlier removal), train, and evaluate models; tuned <strong>Decision Tree</strong> selected as best performer at <strong>~73% test accuracy</strong> (GridSearchCV, 10-fold CV ≈ 0.727).</li>
               <li>Led a team of 3 — resolved conflicts to keep communication smooth and delivered on deadline.</li>
             </ul>
             <div class="project-tags"><span>Python</span><span>scikit-learn</span><span>Kaggle</span><span>Leadership</span></div>
